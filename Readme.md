@@ -31,7 +31,7 @@ sushi::DATABASE=>
 ### Installation
 
 ```bash
-$ heroku plugins:install uhoh-itsmaciek/heroku-run-localjs
+$ heroku plugins:install heroku-run-localjs
 ```
 
 #### Update
