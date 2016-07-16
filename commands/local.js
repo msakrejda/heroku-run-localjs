@@ -1,24 +1,24 @@
-'use strict';
+'use strict'
 
-let cli = require('heroku-cli-util');
-let _ = require('lodash');
-let process = require('process');
-let child_process = require ('child_process');
+const cli = require('heroku-cli-util')
+const _ = require('lodash')
+const process = require('process')
+const childProcess = require('child_process')
 
-function runLocal(context, heroku) {
-  heroku.apps(context.app).configVars().info()
+function runLocal (context, heroku) {
+  return heroku.apps(context.app).configVars().info()
     .then(config => {
       _.forEach(config, (v, k) => {
-	if (!_.includes(['PATH', 'LD_LIBRARY_PATH'], k)) {
-	  process.env[k] = v
-	}
+        if (!_.includes(['PATH', 'LD_LIBRARY_PATH'], k)) {
+          process.env[k] = v
+        }
       })
       let cmd = context.args.join(' ')
-      if (cmd.length == 0) {
-	cli.error("Usage: heroku run:local COMMAND")
-	return
+      if (cmd.length === 0) {
+        cli.error('Usage: heroku run:local COMMAND')
+        return
       }
-      child_process.execSync(cmd, { stdio: [0, 1, 2] })
+      childProcess.execSync(cmd, { stdio: [0, 1, 2] })
     })
 }
 
@@ -51,4 +51,4 @@ d6i28tbalesa80=>
   needsApp: true,
 
   run: cli.command(runLocal)
-};
+}
