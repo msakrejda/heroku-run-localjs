@@ -13,12 +13,35 @@ function runLocal (context, heroku) {
           process.env[k] = v
         }
       })
-      let cmd = context.args.join(' ')
-      if (cmd.length === 0) {
+      if (context.args.length === 0) {
         cli.error('Usage: heroku run:local COMMAND')
         return
       }
-      childProcess.execSync(cmd, { stdio: [0, 1, 2] })
+      let [ cmd, args ] = [ context.args[0], context.args.slice(1) ]
+      let p = childProcess.spawn(cmd, args, { stdio: 'inherit', shell: true })
+
+      const signals = [ 'SIGINT', 'SIGWINCH', 'SIGPIPE' ]
+      _.forEach(signals, (signal) => {
+        process.on(signal, () => {
+          p.kill(signal)
+        })
+      })
+
+      return new Promise((resolve, reject) => {
+        p.on('error', (err) => {
+          reject(err)
+        })
+        p.on('exit', (code, signal) => {
+          // Theoretically we could warn if a signal terminated the
+          // process, but this seems to get weird: e.g., if we run an
+          // interactive psql session and interrupt a long-running
+          // query with Ctrl-C, the signal when we eventually exit
+          // (even if we run other queries in the session) seems to be
+          // SIGINT. Rather than try to make sense of this, we ignore
+          // it for now.
+          process.exit(code)
+        })
+      })
     })
 }
 
