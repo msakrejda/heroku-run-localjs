@@ -24,6 +24,7 @@
     "test": "eslint index.js commands/"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
     "chai": "*",
     "eslint": "*",
     "eslint-plugin-react": "^7.8.2",
