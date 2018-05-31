@@ -29,6 +29,7 @@
     "eslint": "*",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-react": "^7.8.2",
     "mocha": "*"
   }
