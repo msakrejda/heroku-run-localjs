@@ -2,7 +2,6 @@
   "name": "heroku-run-localjs",
   "version": "2.2.0",
   "description": "A heroku plugin to run a command locally with the config vars of a heroku app.",
-  "main": "index.js",
   "author": "Maciek Sakrejda maciek@gmail.com",
   "repository": "uhoh-itsmaciek/heroku-run-localjs",
   "bugs": {
@@ -12,6 +11,11 @@
     "heroku-plugin"
   ],
   "license": "ISC",
+  "main": "index.js",
+  "files": [
+    "/index.js",
+    "/commands"
+  ],
   "dependencies": {
     "heroku-cli-util": "^5.10.12",
     "lodash": "^4.6.1"
