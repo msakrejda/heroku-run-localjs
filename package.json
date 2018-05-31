@@ -27,6 +27,7 @@
     "babel-eslint": "^8.2.3",
     "chai": "*",
     "eslint": "*",
+    "eslint-config-standard": "^11.0.0",
     "eslint-plugin-react": "^7.8.2",
     "mocha": "*"
   }
